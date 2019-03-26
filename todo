@@ -1,0 +1,54 @@
+Database Schemas:
+    - Create database schemas diagram.
+    - Create database schema migrations.
+        - Migrations:
+            - restaurants
+            - products
+            - orders
+            - customers
+            - messages
+            - order_statuses
+    - Create model and relations.
+        - Models:
+            - Restaurant
+            - Product
+            - Order
+            - Customers
+            - Messages
+
+API Routes:
+    - Create Restaurant POST
+    - Create Product POST
+    - Create Order POST
+    - Create Customers POST
+    - List Sent Messages GET
+    - List Other Status Message GET
+
+API Controllers:
+    - Create Restaurant Controller Resource.
+    - Create Product Controller Resource.
+    - Create Order Controller Resource.
+        - POST:
+            - Insert order to the orders table.
+            - Insert message to the messages table.
+            - Send message to customer.
+            - Listen message and update status.
+        - PUT:
+            - Update an order as delivered.
+                - Add a message in queue that for send to customer after 90 minutes.
+    - Create Customer Controller Resource.
+    - Create Messages List Controller Resource.
+        - GET:
+            - Get last 50 sent messages.
+            - Get messages of any other status in last 24 hours.
+
+Notifications:
+    - Install Nexmo package.
+    - Register Nexmo for test.
+    - Create Notification class.
+
+
+Tests:
+    - Write Unit tests
+
+Create Dockerfile
