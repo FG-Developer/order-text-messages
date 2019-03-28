@@ -17,7 +17,7 @@ class CreateMessagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('restaurant_name', 100);
             $table->tinyInteger('delivery_time');
-            $table->string('customer_phone_number', 50);
+            $table->string('customer_phone_number', 20);
             $table->integer('status')->index();
             $table->string('error_text', 255)->nullable();
             $table->timestamps();
