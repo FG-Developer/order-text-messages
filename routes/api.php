@@ -20,4 +20,6 @@ Route::namespace('API')->group(function () {
         'messages' => 'MessageController'
     ]);
 
+    Route::get('/last-sent-messages', 'MessageController@lastSentMessages')->name('messages.last_sent_messages');
+
 });
