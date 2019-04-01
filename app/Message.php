@@ -2,15 +2,19 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+    use Notifiable;
+
     protected $fillable = [
         'restaurant_name',
         'delivery_time',
-        'customer_phone_number',
+        'phone_number',
+        'message',
         'status',
-        'error_text'
+        'status_msg'
     ];
 }
