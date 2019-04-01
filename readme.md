@@ -11,8 +11,10 @@ This project is developed with Laravel 5.8. Also it can use as Microservice via 
 
 Vue.js and Axios frameworks were used for the list of messages. For install these frameworks and other front-end dependencies the following commands must be run sequentially via npm.
 
-``npm install``
-``npm run production``
+```
+npm install
+npm run production
+```
 
 ##### Copy .env file from example
 ``cp .env.example .env``
