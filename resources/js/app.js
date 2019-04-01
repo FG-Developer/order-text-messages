@@ -7,6 +7,12 @@
 
 require('./bootstrap');
 
+window.axios = require('axios');
+window.axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+};
+
 window.Vue = require('vue');
 
 /**
@@ -20,7 +26,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('messages', require('./components/Messages.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
