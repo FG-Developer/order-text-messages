@@ -24,9 +24,9 @@ class OrderRequests extends FormRequest
     public function rules()
     {
         return [
-            'restaurant_name' => 'required|alpha_num|min:2|max:100',
+            'restaurant_name' => 'required|min:2|max:100',
             'delivery_time' => 'required|lte:60|gte:5',
-            'customer_phone_number' => 'required|alpha_num|min:10|max:20'
+            'phone_number' => 'required|digits_between:10,20'
         ];
     }
 }
