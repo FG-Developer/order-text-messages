@@ -3,18 +3,21 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Events\NotificationSent;
 use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Queue\SerializesModels;
 
 class OrderMessage extends Notification implements ShouldQueue
 {
-    use Queueable;
+    use Queueable, SerializesModels;
+
+    public $tries = 2;
 
     private $message;
-    
+    private $notification;
+
     /**
      * Create a new notification instance.
      *
@@ -34,9 +37,10 @@ class OrderMessage extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
+        $this->notification = $notifiable;
         return ['nexmo'];
     }
-    
+
     /**
      * Get the Nexmo / SMS representation of the notification.
      *
@@ -48,7 +52,7 @@ class OrderMessage extends Notification implements ShouldQueue
         return (new NexmoMessage())
             ->content($this->message);
     }
-    
+
     /**
      * Get the mail representation of the notification.
      *
@@ -62,6 +66,7 @@ class OrderMessage extends Notification implements ShouldQueue
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
     }
+
     /**
      * Get the array representation of the notification.
      *
@@ -73,5 +78,16 @@ class OrderMessage extends Notification implements ShouldQueue
         return [
             //
         ];
+    }
+
+    /**
+     * The job failed to process.
+     *
+     * @param  \Exception  $exception
+     * @return void
+     */
+    public function failed(\Exception $exception)
+    {
+        $this->notification->update(['status' => $exception->getCode(), 'status_msg' => $exception->getMessage()]);
     }
 }
